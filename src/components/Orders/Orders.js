@@ -8,7 +8,7 @@ const Orders = () => {
     const { products, initialCart } = useLoaderData();
     const [cart, setCart] = useState(initialCart)
     const handleRemoveItem = (id) => {
-        const remaining = cart.filter(product => product.id !== id)
+        const remaining = cart.filter(product => product._id !== id)
         setCart(remaining)
         removeFromDb(id)
 
@@ -22,7 +22,7 @@ const Orders = () => {
             <div className='orders-container'>
                 {
                     cart.map(product => <ReviewItem
-                        key={product.id}
+                        key={product._id}
                         product={product}
                         handleRemoveItem={handleRemoveItem}
                     ></ReviewItem>)
@@ -36,6 +36,7 @@ const Orders = () => {
                     cart={cart}
                     clearCart={clearCart}
                 >
+                    <Link to='/shipping'><button>Proceed Shipping</button></Link>
                 </Cart>
             </div>
         </div>
